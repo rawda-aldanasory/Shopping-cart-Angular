@@ -11,13 +11,15 @@ export class ProductService {
   private products$ = new BehaviorSubject<Product[]>([
     {
       id: '1',
-      name: 'Test Product',
-      description: 'This is a test product',
-      price: 99.99,
-      imageUrl: 'https://unsplash.com/photos/gray-and-black-laptop-computer-on-surface-Im7lZjxeLhg',
+      name: 'Laptop',
+      description: 'discriptionnnnnnnn',
+      price: 1120,
+      imageUrl: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1120&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       quantity: 10
     }
   ]);
+  
+  private searchTerm$ = new BehaviorSubject<string>('');
 
   constructor(private StorageService: StorageService) {
     const savedProducts = this.StorageService.getItem<Product[]>(this.STORAGE_KEY);
@@ -29,6 +31,16 @@ export class ProductService {
   getProducts(): Observable<Product[]> {
     return this.products$.asObservable();
   }
+
+  getSearchTerm(): Observable<string> {
+    return this.searchTerm$.asObservable();
+  }
+
+  updateSearchTerm(term: string): void {
+    this.searchTerm$.next(term);
+  }
+
+
 
   addProduct(product: Product): void {
     const currentProducts = this.products$.getValue();

@@ -1,8 +1,7 @@
 <div class="product-form-container">
     <h2>{{ isEditMode ? 'Edit Product' : 'Add New Product' }}</h2>
     
-    <!-- <form [formGroup]="productForm" (ngSubmit)="onSubmit()"> -->
-    <form (ngSubmit)="onSubmit()">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="name">Product Name</label>
         <input id="name" type="text" formControlName="name">

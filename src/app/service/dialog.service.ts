@@ -17,26 +17,12 @@ export class DialogService {
 
   confirm(config: DialogConfig): Promise<boolean> {
     return new Promise((resolve) => {
-      this.dialogSubject.next({
-        ...config,
-        confirmText: config.confirmText || 'Confirm',
-        isDangerous: config.isDangerous || false
-      });
-
-      const handleConfirm = () => {
-        cleanup();
-        resolve(true);
-      };
-
-      const handleCancel = () => {
-        cleanup();
-        resolve(false);
-      };
-
-      const cleanup = () => {
-        // Cleanup logic here
-        
-      };
+      const userConfirmed = window.confirm(`${config.title}\n\n${config.message}`);
+      resolve(userConfirmed);
     });
+  }
+
+  alert(options: { title: string; message: string; confirmText?: string }): void {
+    window.alert(`${options.title}\n\n${options.message}`);
   }
 }

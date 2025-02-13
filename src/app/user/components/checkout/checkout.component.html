@@ -23,7 +23,15 @@
         
         <div class="form-group">
           <label for="fullName">Full Name</label>
-          <input id="fullName" type="text" formControlName="fullName">
+          <input 
+            id="fullName" 
+            type="text" 
+            formControlName="fullName"
+            [class.error]="checkoutForm.get('fullName')?.invalid && checkoutForm.get('fullName')?.touched"
+          >
+          <span class="error-message" *ngIf="getErrorMessage('fullName')">
+            {{ getErrorMessage('fullName') }}
+          </span>
         </div>
 
         <div class="form-group">

@@ -15,7 +15,6 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
 
   constructor(private router: Router) {
-    // Check localStorage for existing session
     const savedUser = localStorage.getItem('currentUser');
     if (savedUser) {
       this.currentUserSubject.next(JSON.parse(savedUser));
@@ -27,14 +26,13 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<boolean> {
-    // Mocking authentication - replace with real authentication API
     if (username === 'admin' && password === 'admin123') {
       const user: User = { username, isAdmin: true };
       localStorage.setItem('currentUser', JSON.stringify(user));
       this.currentUserSubject.next(user);
-      return of(true); // Return true as Observable
+      return of(true); 
     }
-    return of(false); // Return false as Observable
+    return of(false); 
   }
 
   logout(): void {

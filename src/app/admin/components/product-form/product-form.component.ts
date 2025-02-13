@@ -61,11 +61,11 @@ export class ProductFormComponent implements OnInit {
       } else {
         this.productService.addProduct({
           ...productData,
-          id: Date.now().toString() // Simple ID generation
+          id: Date.now().toString() 
         });
       }
       
-      this.router.navigate(['/admin']);
+      this.router.navigate(['/admin/products']);
     }
   }
 }

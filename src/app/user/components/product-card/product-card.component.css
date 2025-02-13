@@ -1,6 +1,7 @@
 .product-card {
     border: 1px solid #ddd;
     border-radius: 8px;
+    max-width: 300px;
     overflow: hidden;
     transition: transform 0.2s;
     background: white;
@@ -75,4 +76,39 @@
   .add-to-cart:disabled {
     background: #bdc3c7;
     cursor: not-allowed;
+  }
+
+  .stock {
+    font-weight: 500;
+    margin: 8px 0;
+  }
+  
+  .out-of-stock {
+    color: #dc3545;
+  }
+  
+  .low-stock {
+    color: #ffc107;
+  }
+  
+  .in-stock {
+    color: #28a745;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .view-details {
+    padding: 0.5rem 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .view-details:hover {
+    background-color: #e9ecef;
   }

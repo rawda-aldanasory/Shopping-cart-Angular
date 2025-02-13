@@ -1,18 +1,36 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ProductCardComponent } from './user/components/product-card/product-card.component';
+import { ProductService } from './service/product.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, RouterModule, FormsModule, CommonModule],
   template: `
     <header>
       <nav>
-        <ul>
-          <li><a routerLink="/">Home</a></li>
-          <li><a routerLink="/cart">Cart</a></li>
-          <li><a routerLink="/admin">Admin</a></li>
-        </ul>
+        <div class="logo">
+          <h1>Angular Store</h1>
+        </div>
+        <div class="nav-links">
+          <ul>
+            <li><a routerLink="/">Home</a></li>
+            <li><a routerLink="/cart">Cart</a></li>
+            <li><a routerLink="/admin">Admin</a></li>
+          </ul>
+        </div>
+        <div class="search-bar">
+          <input 
+            type="text" 
+            placeholder="Search products..."
+            [(ngModel)]="searchTerm"  
+            (input)="onSearchChange()"  
+          />
+          <button (click)="onSearch()">Search</button>
+        </div>
       </nav>
     </header>
     <main>
@@ -20,26 +38,89 @@ import { RouterOutlet } from '@angular/router';
     </main>
   `,
   styles: [`
-    header {
-      background-color: #333;
-      padding: 1rem;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1rem;
-      margin: 0;
-      padding: 0;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-    }
-    main {
-      padding: 1rem;
-    }
+header {
+  background-color: #333;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+nav .logo {
+  flex: 1;
+  color: #fff;
+}
+
+nav .nav-links {
+  flex: 2; 
+  display: flex;
+  justify-content: center; 
+}
+
+nav .nav-links ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav .nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+nav .search-bar {
+  flex: 1; 
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+nav .search-bar input {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+nav .search-bar button {
+  padding: 0.5rem;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+nav .search-bar button:hover {
+  background-color: #e68900;
+}
+
+main {
+  padding: 1rem;
+}
+
+
   `]
 })
 export class AppComponent {
-  title = 'shopping-cart';
+  searchTerm: string = '';
+
+  constructor(private productService: ProductService) {}
+
+  onSearchChange() {
+    this.productService.updateSearchTerm(this.searchTerm);
+  }
+  
+  onSearch() {
+    this.productService.updateSearchTerm(this.searchTerm);
+  }
 }
